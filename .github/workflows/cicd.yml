@@ -81,7 +81,6 @@ jobs:
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f k8s/00-namespace.yaml
-          kubectl apply -f k8s/06-secrets-config.yaml
           kubectl apply -f k8s/01-postgres.yaml
           kubectl apply -f k8s/02-redis.yaml
           kubectl apply -f k8s/03-vote.yaml
