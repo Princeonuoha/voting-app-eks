@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+.env
+*.log
+k8s/06-secrets-config.yaml
+k8s/06-secrets-config.yaml
