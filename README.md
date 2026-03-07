@@ -64,36 +64,27 @@ Result --> Postgres
 | 🐘 PostgreSQL | Database | Stores results |
 
 
-🧩 Tech Stack
-Cloud Infrastructure
+## 🧩 Tech Stack
 
-AWS EKS
+### ☁️ Cloud Infrastructure
+- AWS EKS
+- AWS Elastic Load Balancer
+- Cloudflare DNS
 
-AWS Elastic Load Balancer
+### 🐳 Containerization
+- Docker
+- Docker Hub
 
-Cloudflare DNS
+### ☸️ Orchestration
+- Kubernetes
+- NGINX Ingress Controller
 
-Containerization
+### 🔄 CI/CD
+- GitHub Actions
 
-Docker
-
-Docker Hub
-
-Orchestration
-
-Kubernetes
-
-NGINX Ingress Controller
-
-CI/CD
-
-GitHub Actions
-
-Security
-
-Kubernetes Secrets
-
-ConfigMaps
+### 🔐 Security
+- Kubernetes Secrets
+- ConfigMaps
 
 🔄 CI/CD Pipeline
 Pipeline Flow
