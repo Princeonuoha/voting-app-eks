@@ -20,13 +20,17 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 🧠 Kubernetes Architecture
 Traffic Flow
 User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
-⚙️ Microservices
-Service	Technology	Purpose
-🐍 Vote	Python Flask	Collects votes
-🌐 Result	Node.js	Displays results
-⚙️ Worker	.NET Core	Processes queued votes
-🧠 Redis	In-memory queue	Message broker
-🐘 PostgreSQL	Database	Stores results
+## ⚙️ Microservices
+
+| Service | Technology | Purpose |
+|--------|------------|---------|
+| 🐍 Vote | Python Flask | Collects votes |
+| 🌐 Result | Node.js | Displays results |
+| ⚙️ Worker | .NET Core | Processes queued votes |
+| 🧠 Redis | In-memory queue | Message broker |
+| 🐘 PostgreSQL | Database | Stores results |
+
+
 🧩 Tech Stack
 Cloud Infrastructure
 
