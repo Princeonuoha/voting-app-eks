@@ -86,22 +86,29 @@ Result --> Postgres
 - Kubernetes Secrets
 - ConfigMaps
 
-🔄 CI/CD Pipeline
-Pipeline Flow
-Developer Push
-      ↓
-GitHub Actions Triggered
-      ↓
-Build Docker Images
-      ↓
-Push Images to Docker Hub
-      ↓
-Deploy to AWS EKS
-      ↓
-Rolling Update
-🎥 Live Application Demo
+## 🔄 CI/CD Pipeline
 
-Place the demo recording here:
+### Pipeline Flow
+
+Developer Push
+↓
+GitHub Actions Triggered
+↓
+Build Docker Images
+↓
+Push Images to Docker Hub
+↓
+Deploy to AWS EKS
+↓
+Rolling Update
+
+
+---
+
+## 🎥 Live Application Demo
+
+Place the demo recording inside the repository:
+
 
 docs/demo.gif
 
