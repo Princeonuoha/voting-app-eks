@@ -124,30 +124,32 @@ Display it like this:
 
 ## 1️⃣ Manual Kubernetes Deployment
 
-Initial deployments were done manually.
+```mermaid
+flowchart TD
 
-### Deployment Flow
+Dev[👨‍💻 Developer] --> Build[Build Docker Images]
 
+Build --> Push[Push Images to Docker Hub]
 
-Build Docker Image
-        ↓
-Push to Docker Hub
-        ↓
-kubectl apply -f k8s/
-        ↓
-Application Live
+Push --> Apply[kubectl apply -f k8s/]
 
-Resources used
+Apply --> Cluster[EKS Cluster]
 
-Kubernetes Deployments
+subgraph Kubernetes
+Vote[🐍 Vote Service]
+Result[🌐 Result Service]
+Worker[⚙️ Worker Service]
+Redis[(🧠 Redis)]
+Postgres[(🐘 PostgreSQL)]
+end
 
-Services
-
-ConfigMaps
-
-Secrets
-
-Ingress Controller
+Cluster --> Vote
+Cluster --> Result
+Cluster --> Worker
+Worker --> Redis
+Worker --> Postgres
+Result --> Postgres
+```
 
 2️⃣ Automated CI/CD Deployment
 
