@@ -1,71 +1,46 @@
-## 🏗️ Kubernetes Architecture
+🗳️ Cloud-Native Voting Application
+Kubernetes + CI/CD on AWS EKS
 
-```mermaid
-flowchart TD
 
-User[🌍 User] --> Cloudflare[Cloudflare DNS]
 
-Cloudflare --> ELB[AWS Load Balancer]
 
-ELB --> Ingress[NGINX Ingress Controller]
 
-Ingress --> Vote[Vote Service<br>Python Flask]
 
-Ingress --> Result[Result Service<br>Node.js]
 
-Vote --> Redis[Redis Queue]
 
-Redis --> Worker[Worker Service<br>.NET Core]
 
-Worker --> Postgres[PostgreSQL Database]
 
-Result --> Postgres
+A cloud-native microservices application deployed on AWS EKS using Docker, Kubernetes, NGINX Ingress, and GitHub Actions CI/CD.
+
+This project demonstrates the transition from manual Kubernetes deployments to a fully automated DevOps workflow.
+
+🏗️ Architecture Diagram
+
+If you upload an architecture image, it will appear here.
+
+docs/architecture.png
+
+Add it like this:
+
+![Architecture]([docs/architecture.png](https://github.com/Princeonuoha/voting-app-eks/blob/main/architecture.png))
+🧠 Kubernetes Architecture
+
+Traffic Flow
 
 User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
-
-⚙️ Microservices Architecture
-
-| Service       | Technology      | Purpose                |
-| ------------- | --------------- | ---------------------- |
-| 🐍 Vote       | Python Flask    | Collects votes         |
-| 🌐 Result     | Node.js         | Displays results       |
-| ⚙️ Worker     | .NET Core       | Processes queued votes |
-| 🧠 Redis      | In-memory queue | Message broker         |
-| 🐘 PostgreSQL | Database        | Stores results         |
-
-🔄 CI/CD Pipeline
-
-Pipeline Flow
-
-Developer Push
-      ↓
-GitHub Actions Triggered
-      ↓
-Build Docker Images
-      ↓
-Push Images to Docker Hub
-      ↓
-Deploy to AWS EKS
-      ↓
-Rolling Update
-🎥 Live Application Demo
-
-The demo shows:
-
-Submitting a vote
-
-Processing via Redis queue
-
-Worker storing results in PostgreSQL
-
-Result service displaying updated data
-
+⚙️ Microservices
+Service	Technology	Purpose
+🐍 Vote	Python Flask	Collects votes
+🌐 Result	Node.js	Displays results
+⚙️ Worker	.NET Core	Processes queued votes
+🧠 Redis	In-memory queue	Message broker
+🐘 PostgreSQL	Database	Stores results
 🧩 Tech Stack
 Cloud Infrastructure
 
 AWS EKS
 
-AWS Load Balancer
+AWS Elastic Load Balancer
 
 Cloudflare DNS
 
@@ -91,22 +66,57 @@ Kubernetes Secrets
 
 ConfigMaps
 
+🔄 CI/CD Pipeline
+
+Pipeline Flow
+
+Developer Push
+      ↓
+GitHub Actions Triggered
+      ↓
+Build Docker Images
+      ↓
+Push Images to Docker Hub
+      ↓
+Deploy to AWS EKS
+      ↓
+Rolling Update
+🎥 Live Application Demo
+
+If you record a demo GIF place it in:
+
+docs/demo.gif
+
+Then add:
+
+![Voting Demo](docs/demo.gif)
+
+Demo should show:
+
+Submit vote
+
+Redis queue processing
+
+Worker storing vote
+
+Results updating
+
 🚀 Deployment Methods
 1️⃣ Manual Kubernetes Deployment
 
-Initial deployment used manual Kubernetes operations.
+Initial deployments were done manually.
 
 Build Docker Image
-      ↓
+        ↓
 Push to Docker Hub
-      ↓
+        ↓
 kubectl apply -f k8s/
-      ↓
+        ↓
 Application Live
 
 Resources used
 
-Deployments
+Kubernetes Deployments
 
 Services
 
@@ -118,39 +128,40 @@ Ingress Controller
 
 2️⃣ Automated CI/CD Deployment
 
-The project was later upgraded with GitHub Actions automation.
+The project was enhanced with GitHub Actions automation.
 
-Code Push → GitHub Actions → Build Images → Push to Docker Hub → Deploy to EKS
+Code Push → GitHub Actions → Build → Push Images → Deploy to EKS
+
 Benefits
 
 🚀 Zero manual deployments
 
 🔐 Secure secret handling
 
-⚡ Faster releases
+⚡ Faster production updates
 
 📉 Reduced configuration drift
 
-♻️ Immutable deployments
+♻️ Immutable container deployments
 
 🌐 DNS & Routing
 
 DNS is managed via Cloudflare.
 
-Routing example:
+Example routing:
 
 Domain	Service
 vote.domain.com	Vote service
 result.domain.com	Result service
 
-Traffic routing:
+Traffic Flow
 
 User → Cloudflare → AWS ELB → NGINX Ingress → Kubernetes Pods
 🔐 Secret Management
 
-Sensitive configuration is never committed to GitHub.
+Sensitive values are never committed to GitHub.
 
-Secrets are injected via:
+Secrets are injected through:
 
 GitHub Secrets
 
@@ -158,7 +169,7 @@ Kubernetes Secrets
 
 Runtime environment variables
 
-Examples:
+Examples
 
 Database credentials
 
@@ -193,17 +204,15 @@ API configuration
 
 This project required debugging across networking, DNS, and Kubernetes layers.
 
-Key issues solved:
+Key issues solved
 
-🌍 A record vs CNAME confusion
+Cloudflare proxy vs DNS conflicts
 
-🌐 Cloudflare proxy conflicts
+Ingress host routing mismatches
 
-🚫 Ingress host mismatch causing 404 errors
+Worker service connection errors
 
-🔐 Secure secret injection
-
-⚙️ Worker service environment mismatch
+Secure secret injection
 
 Debugging tools used
 
@@ -216,13 +225,13 @@ curl -H "Host:..."
 
 Kubernetes routing is host-header driven
 
-Ingress 404 errors often indicate routing issues
+Ingress 404 errors often indicate routing misconfiguration
 
-CI/CD drastically reduces operational overhead
+CI/CD eliminates deployment friction
 
-Secrets should never be version controlled
+Secrets should never be committed to Git
 
-Observability is critical for debugging distributed systems
+Observability is critical for distributed systems
 
 🔮 Future Improvements
 
@@ -232,14 +241,12 @@ Prometheus + Grafana monitoring
 
 Helm packaging
 
-Integration tests in CI
-
 Blue/Green deployments
+
+Automated integration testing
 
 👨‍💻 Author
 
 Prince Onuoha
 
-DevOps Engineer focused on cloud-native infrastructure, Kubernetes, and automated deployment pipelines.
-
-
+DevOps Engineer focused on cloud-native infrastructure, Kubernetes orchestration, and automated deployment pipelines.
