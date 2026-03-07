@@ -16,12 +16,6 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 
 🏗️ Architecture Diagram
 
-Upload your diagram inside the docs folder:
-
-docs/architecture.png
-
-Then display it like this:
-
 ![Architecture](architecture.png)
 🧠 Kubernetes Architecture
 Traffic Flow
