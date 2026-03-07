@@ -18,8 +18,17 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 
 ![Architecture](architecture.png)
 🧠 Kubernetes Architecture
-Traffic Flow
-User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
+### 🌐 Traffic Flow
+
+User
+↓
+Cloudflare DNS
+↓
+AWS Load Balancer (ELB)
+↓
+NGINX Ingress Controller
+↓
+Kubernetes Services
 ## ⚙️ Microservices
 
 | Service | Technology | Purpose |
