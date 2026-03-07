@@ -17,19 +17,41 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 🏗️ Architecture Diagram
 
 ![Architecture](architecture.png)
-🧠 Kubernetes Architecture
+
+### 🌐 Traffic Flow
+
 ### 🌐 Traffic Flow
 
 ```mermaid
 flowchart TD
 
-User[User] --> Cloudflare[Cloudflare DNS]
+User[🌍 User] --> DNS[Cloudflare DNS]
 
-Cloudflare --> ELB[AWS Load Balancer]
+DNS --> ELB[AWS Load Balancer]
 
 ELB --> Ingress[NGINX Ingress Controller]
 
-Ingress --> Services[Kubernetes Services]
+subgraph EKS Cluster
+
+Vote[🐍 Vote Service<br>Python Flask]
+
+Result[🌐 Result Service<br>Node.js]
+
+Worker[⚙️ Worker Service<br>.NET Core]
+
+Redis[(🧠 Redis Queue)]
+
+Postgres[(🐘 PostgreSQL)]
+
+end
+
+Ingress --> Vote
+Ingress --> Result
+
+Vote --> Redis
+Redis --> Worker
+Worker --> Postgres
+Result --> Postgres
 ```
 ## ⚙️ Microservices
 
