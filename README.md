@@ -16,17 +16,15 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 
 🏗️ Architecture Diagram
 
-If you upload an architecture image, it will appear here.
+Upload your diagram inside the docs folder:
 
 docs/architecture.png
 
-Add it like this:
+Then display it like this:
 
-![Architecture]([docs/architecture.png](https://github.com/Princeonuoha/voting-app-eks/blob/main/architecture.png))
+![Architecture](docs/architecture.png)
 🧠 Kubernetes Architecture
-
 Traffic Flow
-
 User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
 ⚙️ Microservices
 Service	Technology	Purpose
@@ -67,9 +65,7 @@ Kubernetes Secrets
 ConfigMaps
 
 🔄 CI/CD Pipeline
-
 Pipeline Flow
-
 Developer Push
       ↓
 GitHub Actions Triggered
@@ -83,23 +79,23 @@ Deploy to AWS EKS
 Rolling Update
 🎥 Live Application Demo
 
-If you record a demo GIF place it in:
+Place the demo recording here:
 
 docs/demo.gif
 
-Then add:
+Display it like this:
 
 ![Voting Demo](docs/demo.gif)
 
-Demo should show:
+Your demo should show:
 
-Submit vote
+Submitting a vote
 
 Redis queue processing
 
-Worker storing vote
+Worker storing vote in PostgreSQL
 
-Results updating
+Result service updating the result page
 
 🚀 Deployment Methods
 1️⃣ Manual Kubernetes Deployment
@@ -131,7 +127,6 @@ Ingress Controller
 The project was enhanced with GitHub Actions automation.
 
 Code Push → GitHub Actions → Build → Push Images → Deploy to EKS
-
 Benefits
 
 🚀 Zero manual deployments
@@ -146,22 +141,19 @@ Benefits
 
 🌐 DNS & Routing
 
-DNS is managed via Cloudflare.
+DNS is managed through Cloudflare.
 
-Example routing:
-
+Example Routing
 Domain	Service
 vote.domain.com	Vote service
 result.domain.com	Result service
-
 Traffic Flow
-
 User → Cloudflare → AWS ELB → NGINX Ingress → Kubernetes Pods
 🔐 Secret Management
 
 Sensitive values are never committed to GitHub.
 
-Secrets are injected through:
+Secrets are injected using:
 
 GitHub Secrets
 
@@ -204,7 +196,7 @@ API configuration
 
 This project required debugging across networking, DNS, and Kubernetes layers.
 
-Key issues solved
+Key Issues Solved
 
 Cloudflare proxy vs DNS conflicts
 
@@ -214,8 +206,7 @@ Worker service connection errors
 
 Secure secret injection
 
-Debugging tools used
-
+Debugging Tools Used
 kubectl logs
 kubectl describe
 kubectl get ingress
@@ -227,7 +218,7 @@ Kubernetes routing is host-header driven
 
 Ingress 404 errors often indicate routing misconfiguration
 
-CI/CD eliminates deployment friction
+CI/CD reduces operational deployment friction
 
 Secrets should never be committed to Git
 
