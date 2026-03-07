@@ -88,27 +88,25 @@ Result --> Postgres
 
 ## 🔄 CI/CD Pipeline
 
-### Pipeline Flow
+```mermaid
+flowchart LR
 
-Developer Push
-↓
-GitHub Actions Triggered
-↓
-Build Docker Images
-↓
-Push Images to Docker Hub
-↓
-Deploy to AWS EKS
-↓
-Rolling Update
+Dev[Developer Push] --> Actions[GitHub Actions]
 
+Actions --> Build[Build Docker Images]
+
+Build --> Push[Push Images to Docker Hub]
+
+Push --> Deploy[Deploy to AWS EKS]
+
+Deploy --> Update[Rolling Update]
+```
 
 ---
 
 ## 🎥 Live Application Demo
 
-Place the demo recording inside the repository:
-
+Place the demo recording inside:
 
 docs/demo.gif
 
@@ -116,16 +114,12 @@ Display it like this:
 
 ![Voting Demo](docs/demo.gif)
 
-Your demo should show:
+### Demo should show
 
-Submitting a vote
-
-Redis queue processing
-
-Worker storing vote in PostgreSQL
-
-Result service updating the result page
-
+- Submitting a vote
+- Redis queue processing
+- Worker storing vote in PostgreSQL
+- Result service updating the result page
 🚀 Deployment Methods
 1️⃣ Manual Kubernetes Deployment
 
