@@ -1,140 +1,191 @@
 🗳️ Cloud-Native Voting Application
 Kubernetes + CI/CD on AWS EKS
 
-A fully containerized microservices application deployed on AWS EKS with NGINX Ingress, Cloudflare DNS, and a complete GitHub Actions CI/CD pipeline.
+
+
+
+
+
+
+
+
+
+A cloud-native microservices application deployed on AWS EKS with NGINX Ingress, Cloudflare DNS, and a fully automated GitHub Actions CI/CD pipeline.
 
 This project demonstrates the evolution from manual Kubernetes deployments to a production-ready automated DevOps workflow.
 
 🚀 Live Architecture Overview
-
-🌍 User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
-
-Microservices:
-
-🐍 Vote – Python (Flask)
-
-🌐 Result – Node.js
-
-⚙️ Worker – .NET Core
-
-🧠 Redis – Queue
-
-🐘 PostgreSQL – Database
-
-🏗️ Architecture Diagram
-Internet
-   │
+User
+ │
+ ▼
 Cloudflare DNS
-   │
-AWS ELB (LoadBalancer)
-   │
+ │
+ ▼
+AWS Load Balancer (ELB)
+ │
+ ▼
 NGINX Ingress Controller
-   │
-┌─────────────────────────────┐
-│         EKS Cluster         │
-│                             │
-│  Vote (Python)              │
-│  Result (Node)              │
-│  Worker (.NET)              │
-│  Redis                      │
-│  PostgreSQL                 │
-└─────────────────────────────┘
-🧩 Tech Stack
+ │
+ ▼
+Kubernetes Services
+🏗️ System Architecture
+                    🌍 Internet
+                         │
+                         ▼
+                Cloudflare DNS
+                         │
+                         ▼
+              AWS ELB (LoadBalancer)
+                         │
+                         ▼
+              NGINX Ingress Controller
+                         │
+     ┌──────────────────────────────────┐
+     │           EKS Cluster            │
+     │                                  │
+     │  🐍 Vote Service (Python Flask)  │
+     │  🌐 Result Service (Node.js)     │
+     │  ⚙️ Worker (.NET Core)           │
+     │  🧠 Redis Queue                  │
+     │  🐘 PostgreSQL Database          │
+     │                                  │
+     └──────────────────────────────────┘
+🧩 Microservices
+Service	Technology	Purpose
+🐍 Vote	Python Flask	Collects votes
+🌐 Result	Node.js	Displays voting results
+⚙️ Worker	.NET Core	Processes queued votes
+🧠 Redis	In-memory queue	Message broker
+🐘 PostgreSQL	Database	Stores results
+🧱 Tech Stack
+Cloud Infrastructure
 
-☁️ AWS EKS
+AWS EKS
 
-🐳 Docker
+AWS Load Balancer
 
-☸️ Kubernetes
+Cloudflare DNS
 
-🔀 NGINX Ingress
+Containerization
 
-🌍 Cloudflare DNS
+Docker
 
-🔐 Kubernetes Secrets & ConfigMaps
+Docker Hub
 
-🔄 GitHub Actions CI/CD
+Orchestration
 
-🧱 Infrastructure as Code mindset
+Kubernetes
 
-🛠️ Deployment Methods
+NGINX Ingress Controller
+
+CI/CD
+
+GitHub Actions
+
+Security
+
+Kubernetes Secrets
+
+ConfigMaps
+
+⚙️ Deployment Evolution
+
+This project demonstrates two deployment approaches.
+
 1️⃣ Manual Kubernetes Deployment
 
-Initial deployment was done using:
+Initial deployments were executed manually.
 
-Docker image builds
-
-Docker Hub push
-
-kubectl apply -f k8s/
-
-ConfigMaps & Secrets for environment configuration
-
-Ingress for routing traffic
-
-Manual Flow:
+Deployment Workflow
 Build Docker Image
-    ↓
+        │
+        ▼
 Push to Docker Hub
-    ↓
-kubectl apply
-    ↓
-Application Live
-2️⃣ Automated CI/CD Deployment (GitHub Actions)
+        │
+        ▼
+kubectl apply -f k8s/
+        │
+        ▼
+Application deployed to EKS
+Components Used
 
-The project was enhanced with a fully automated CI/CD pipeline.
+Kubernetes Deployments
 
-Pipeline Stages:
+Kubernetes Services
 
-📦 Code pushed to GitHub
+ConfigMaps
 
-🐳 Build Docker images (vote, result, worker)
+Secrets
 
-📤 Push images to Docker Hub
+NGINX Ingress
 
-🔐 Inject secrets securely from GitHub Secrets
+2️⃣ Automated CI/CD Deployment
 
-☸️ Deploy to EKS automatically
+The project was upgraded with a fully automated GitHub Actions pipeline.
 
-🔁 Rolling update of services
-
-CI/CD Benefits:
+CI/CD Pipeline
+Developer Push
+      │
+      ▼
+GitHub Actions Triggered
+      │
+      ▼
+Build Docker Images
+(vote, result, worker)
+      │
+      ▼
+Push Images → Docker Hub
+      │
+      ▼
+Inject GitHub Secrets
+      │
+      ▼
+Deploy to AWS EKS
+      │
+      ▼
+Rolling Update via Kubernetes
+⚡ CI/CD Benefits
 
 🚀 Zero manual deployments
 
 🔐 Secure secret handling
 
+⚡ Faster production releases
+
 📉 Reduced configuration drift
 
-⚡ Faster production updates
-
-♻️ Immutable deployments
+♻️ Immutable container deployments
 
 🌐 DNS & Routing
 
-Domain managed via Cloudflare
+DNS is managed via Cloudflare.
 
-CNAME records point to AWS ELB
+Traffic flow:
 
-NGINX Ingress handles host-based routing
-
-Example:
-
-vote.domain.com → Vote service
-
-result.domain.com → Result service
-
+User → Cloudflare → AWS ELB → NGINX Ingress → Kubernetes Services
+Host Routing
+Domain	Service
+vote.domain.com	Vote service
+result.domain.com	Result service
 🔐 Secret Management
 
-Sensitive values are not committed to GitHub.
+Sensitive data is never committed to GitHub.
 
-Instead:
+Secrets are handled through:
 
-Kubernetes Secrets are generated dynamically
+GitHub Secrets
 
-GitHub Secrets are used during CI/CD
+Kubernetes Secrets
 
-Secure environment injection at deployment time
+Runtime environment injection
+
+Example secrets:
+
+Database credentials
+
+Redis connection strings
+
+Application configuration
 
 📁 Project Structure
 .
@@ -145,71 +196,69 @@ Secure environment injection at deployment time
 │   ├── vote.yaml
 │   ├── result.yaml
 │   ├── worker.yaml
-│   ├── ingress.yaml
+│   └── ingress.yaml
 │
 ├── vote/
 ├── result/
 ├── worker/
 │
-└── .github/workflows/
-    └── cicd.yml
+└── .github/
+    └── workflows/
+        └── cicd.yml
 ⚠️ Challenges Faced
 
 This project required deep debugging across networking, DNS, and Kubernetes layers.
 
-Key Challenges:
+Key Issues Solved
 
-🔄 A Record vs CNAME confusion (ELB hostname routing)
+🌍 A Record vs CNAME confusion
 
-🌍 Cloudflare proxy vs DNS-only conflicts
+🔁 Cloudflare proxy vs DNS-only conflicts
 
-🚫 404 errors due to incorrect Ingress host matching
+🚫 404 errors from incorrect Ingress host rules
 
-🔐 Secure secret handling without exposing credentials
+🔐 Secure secret injection
 
-🧩 Worker failing to connect due to environment mismatch
+⚙️ Worker connection failures due to environment mismatch
 
-🧠 Debugging using:
-
+Debugging Tools Used
 kubectl logs
-
 kubectl describe
-
 kubectl get ingress
-
+kubectl get svc
 curl -H "Host:..."
-
 📚 Engineering Lessons Learned
 
-Kubernetes networking is host-header driven
+Kubernetes routing is host-header driven
 
-Ingress 404 ≠ app failure (routing mismatch)
+Ingress 404 errors often indicate routing issues
 
-CI/CD eliminates operational overhead
+CI/CD eliminates operational deployment overhead
 
 Secrets should never be version controlled
 
-Automation reduces human deployment error
+Automation drastically reduces human error
 
-Observability is critical for debugging distributed systems
+Observability is essential for debugging distributed systems
 
 🎯 What This Project Demonstrates
 
-✅ Containerization of multi-language microservices
+✅ Multi-language microservices architecture
+✅ Containerized application deployment
 ✅ Kubernetes service discovery
 ✅ Ingress-based routing
-✅ Production-style DNS setup
+✅ Production-style DNS configuration
 ✅ Secure secret management
-✅ End-to-end CI/CD automation
+✅ Automated CI/CD pipelines
 ✅ Real-world DevOps troubleshooting
 
-🧠 Future Improvements
+🔮 Future Improvements
 
 🔐 cert-manager for automatic TLS certificates
 
 📊 Prometheus + Grafana monitoring
 
-🧪 Automated integration testing in CI
+🧪 Automated integration tests in CI
 
 📦 Helm packaging
 
@@ -217,4 +266,6 @@ Observability is critical for debugging distributed systems
 
 👨‍💻 Author
 
-Built as part of a DevOps engineering project demonstrating cloud-native architecture, automation, and production deployment practices.
+Prince Onuoha
+
+DevOps Engineer focused on cloud-native infrastructure, Kubernetes, and automated deployment pipelines.
