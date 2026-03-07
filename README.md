@@ -18,7 +18,7 @@ This project demonstrates the transition from manual Kubernetes deployments to a
 
 ![Architecture](architecture.png)
 
-### 🌐 Traffic Flow
+
 
 ### 🌐 Traffic Flow
 
