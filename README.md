@@ -22,7 +22,7 @@ docs/architecture.png
 
 Then display it like this:
 
-![Architecture](docs/architecture.png)
+![Architecture](architecture.png)
 🧠 Kubernetes Architecture
 Traffic Flow
 User → Cloudflare DNS → AWS Load Balancer → NGINX Ingress → Kubernetes Services
