@@ -120,10 +120,14 @@ Display it like this:
 - Redis queue processing
 - Worker storing vote in PostgreSQL
 - Result service updating the result page
-🚀 Deployment Methods
-1️⃣ Manual Kubernetes Deployment
+# 🚀 Deployment Methods
+
+## 1️⃣ Manual Kubernetes Deployment
 
 Initial deployments were done manually.
+
+### Deployment Flow
+
 
 Build Docker Image
         ↓
