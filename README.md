@@ -119,6 +119,29 @@ Secrets
 
 NGINX Ingress
 
+## 🏗️ Kubernetes Architecture
+
+```mermaid
+flowchart TD
+
+User[🌍 User] --> Cloudflare[Cloudflare DNS]
+
+Cloudflare --> ELB[AWS Load Balancer]
+
+ELB --> Ingress[NGINX Ingress Controller]
+
+Ingress --> Vote[Vote Service<br>Python Flask]
+
+Ingress --> Result[Result Service<br>Node.js]
+
+Vote --> Redis[Redis Queue]
+
+Redis --> Worker[Worker Service<br>.NET Core]
+
+Worker --> Postgres[PostgreSQL Database]
+
+Result --> Postgres
+
 2️⃣ Automated CI/CD Deployment
 
 The project was upgraded with a fully automated GitHub Actions pipeline.
